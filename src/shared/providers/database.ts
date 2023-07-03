@@ -1,15 +1,7 @@
-// IndexedDB
-var indexedDB =
-  window.indexedDB ||
-  window.webkitIndexedDB ||
-  window.mozIndexedDB ||
-  window.OIndexedDB ||
-  window.msIndexedDB;
-var IDBTransaction =
-  window.IDBTransaction ||
-  window.webkitIDBTransaction ||
-  window.OIDBTransaction ||
-  window.msIDBTransaction;
+//@ts-ignore
+var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
+//@ts-ignore
+var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction;
 var dbVersion = 2;
 
 interface DBEntry {
