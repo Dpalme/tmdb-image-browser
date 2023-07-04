@@ -5,6 +5,7 @@ export default defineConfig({
     include: ['./index.html', './src/index.css', './src/**/*.{tsx,css}'],
     exclude: ['node_modules', '.git'],
   },
+  darkMode: 'media',
   theme: {
     extend: {
       fontFamily: {
@@ -29,7 +30,7 @@ export default defineConfig({
           'sans-serif',
           'Apple Color Emoji',
           'Segoe UI Emoji',
-        ]
+        ],
       },
       colors: {
         primary: {

@@ -1,12 +1,9 @@
-import {
-  useAddToCollection,
-  useImageIsInCollection,
-  useRemoveFromCollection,
-} from '@/collection/hooks';
-import { LoadingSpinner } from '@/shared/components/loadingSpinner';
-import { TMDBImage, getURLForSize } from '@/shared/components/tmdbImg';
+import { TMDBImage } from '@/shared/components/tmdbimages/tmdbImg';
 import { useModal } from '@/shared/hooks/useModal';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
+import { m } from 'framer-motion';
+import { AddToCollectionButton } from '@/shared/components/tmdbimages/addToCollectionButton';
+import { ModalTMDBImage } from '@/shared/components/tmdbimages/modalImage';
 
 export const ImageCard = (props: {
   type: 'backdrop' | 'logo' | 'poster' | 'profile' | 'still';
@@ -17,35 +14,23 @@ export const ImageCard = (props: {
   height: number;
   width: number;
 }) => {
-  const [inCollection, setInCollection] = useState(props.inCollection);
-  const { mutate: addToCollection, isLoading: addLoading } =
-    useAddToCollection();
-  const { mutate: removeFromCollection, isLoading: remLoading } =
-    useRemoveFromCollection();
-
   const setModal = useModal();
   const imageToModal = useCallback(() => {
-    setModal(
-      <>
-        <TMDBImage
-          type={props.type}
-          path={props.file_path}
-          aspectRatio={props.aspect_ratio}
-          className="w-full h-full object-contain"
-        />
-        <div className="p-4 bg-black w-full text-center">
-          <a
-            href={getURLForSize('original', props.file_path)}
-            download={true}
-            target='_blank'
-          >Download</a>
-        </div>
-      </>
-    );
+    setModal(<ModalTMDBImage {...props} />);
   }, [setModal]);
 
   return (
-    <div className="relative self-start">
+    <m.div
+      initial={{ opacity: 0, y: '100%' }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+      className={[
+        'relative self-start',
+        props.type == 'backdrop' && 'row-span-1 order-1',
+        props.type == 'poster' && 'row-span-2 order-2',
+      ].join(' ')}
+    >
       <TMDBImage
         type={props.type}
         path={props.file_path}
@@ -54,51 +39,24 @@ export const ImageCard = (props: {
         className="bg-gray-600"
       />
       <div
-        className="absolute top-0 left-0 w-full h-full opacity-0 hover:opacity-100
-        transition-opacity flex flex-col items-end"
+        className="absolute top-0 left-0 w-full h-full opacity-0
+        hover:opacity-100 transition-opacity flex flex-col items-end
+        cursor-pointer"
         onClick={() => imageToModal()}
       >
-        <div className="bg-black bg-opacity-75 p-2 font-extralight italic">
-          {addLoading || remLoading ? (
-            <LoadingSpinner />
-          ) : inCollection === true ? (
-            <div
-              onClick={() =>
-                removeFromCollection(props.file_path, {
-                  onSuccess: () => setInCollection(false),
-                })
-              }
-              className="cursor-pointer navlink text-red-600"
-            >
-              - <span className="text-xs">Remove from collection</span>
-            </div>
-          ) : (
-            <div
-              onClick={() =>
-                addToCollection(
-                  {
-                    file_path: props.file_path,
-                    movie_id: props.movie_id,
-                    aspect_ratio: props.aspect_ratio,
-                    height: props.height,
-                    width: props.width,
-                    type: props.type,
-                  },
-                  {
-                    onSuccess: () => setInCollection(true),
-                  }
-                )
-              }
-              className="cursor-pointer navlink text-emerald-600"
-            >
-              + <span className="text-xs">Add to collection</span>
-            </div>
-          )}
+        <div
+          className="dark:bg-black bg-white bg-opacity-75 p-2
+        font-extralight italic"
+        >
+          <AddToCollectionButton {...props} />
         </div>
-        <div className="absolute bottom-0 left-0 bg-black bg-opacity-70">
+        <div
+          className="absolute bottom-0 left-0 dark:bg-black
+        bg-opacity-70 bg-white"
+        >
           {props.width} x {props.height}
         </div>
       </div>
-    </div>
+    </m.div>
   );
 };

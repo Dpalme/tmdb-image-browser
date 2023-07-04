@@ -123,11 +123,7 @@ export function getCollection(
         var tx = db.transaction('collection', 'readonly');
         let list_ref = tx.objectStore('collection');
         const trans = list_ref.getAll(query, limit);
-        trans.onsuccess = () => {
-          console.log(trans.result);
-
-          res(trans.result);
-        };
+        trans.onsuccess = () => res(trans.result);
         trans.onerror = () => rej(trans.error);
       };
     } catch (e) {

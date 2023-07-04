@@ -14,7 +14,7 @@ export function getURLForSize(size: string, imgPath: string) {
   return `${BASE_URL}${size}${imgPath}`;
 }
 
-function getSmallestImage(
+export function getSmallestImage(
   type: 'backdrop' | 'logo' | 'poster' | 'profile' | 'still',
   path: string
 ) {
@@ -29,7 +29,7 @@ function getSrcSetForImage(
   const sizes = SIZES[type];
   const srcSets = sizes
     .slice(0, -1)
-    .map((size) => `${getURLForSize(size, path)} ${size.slice(1)}w`);
+    .map((size, i) => `${getURLForSize(size, path)} ${size.slice(1)}w`);
 
   const lastTwoSizes = sizes
     .slice(sizes.length - 3, -1)
@@ -63,10 +63,12 @@ export const TMDBImage = (props: {
     <img
       src={smallestImage}
       alt={props.alt}
-      srcSet={srcSet}
-      className={props.className}
+      // srcSet={srcSet}
+      className={[props.className, 'w-full'].join(' ')}
       loading="lazy"
       style={{ aspectRatio: props.aspectRatio }}
+      onLoad={(ev) => ev.currentTarget.setAttribute('srcset', srcSet)}
+      width={360}
     />
   );
 };

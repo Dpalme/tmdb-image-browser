@@ -23,8 +23,9 @@ export const ModalProvider = (props: { children: ReactNode }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed z-50 top-0 left-0 bg-black bg-opacity-25
-        backdrop-blur-sm cursor-pointer w-screen h-screen overflow-hidden
+            className="fixed z-50 top-0 left-0 dark:bg-black
+            bg-opacity-25 bg-white backdrop-blur-sm
+            cursor-pointer w-screen h-screen overflow-hidden
         p-4 lg:p-16"
             onClick={resetModal}
           >
