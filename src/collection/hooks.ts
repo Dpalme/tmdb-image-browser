@@ -34,7 +34,14 @@ export const useAddToCollection = () => {
 export const useRemoveFromCollection = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (file_path: string) => removeFromCollection(file_path),
+    mutationFn: (values: {
+      file_path: string;
+      movie_id: number;
+      aspect_ratio: number;
+      width: number;
+      height: number;
+      type: 'backdrop' | 'logo' | 'poster' | 'profile' | 'still';
+    }) => removeFromCollection(values.file_path),
     onSettled: () => {
       queryClient.invalidateQueries(['collection']);
     },

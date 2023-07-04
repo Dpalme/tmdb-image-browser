@@ -9,25 +9,47 @@ export const CollectionPage = () => {
   return (
     <HandleAsync loading={isLoading} error={error}>
       <Container>
-        <div className="mt-8 sticky top-8">
-          <h1 className="text-4xl font-extrabold font-title">Collection</h1>
+        <div className="grid grid-cols-1 gap-2">
+          {collection
+            ?.filter((a) => a.type == 'poster')
+            .sort(
+              (a, b) =>
+                new Date(a.added_on).getTime() - new Date(b.added_on).getTime()
+            )
+            .map((entry) => (
+              <ImageCard
+                type="backdrop"
+                file_path={entry.file_path}
+                movie_id={entry.movie_id}
+                key={entry.file_path}
+                inCollection={true}
+                aspect_ratio={entry.aspect_ratio}
+                width={entry.width}
+                height={entry.height}
+              />
+            ))}
         </div>
         <div
-          className="grid grid-cols-1 md:grid-cols-2
-      lg:grid-cols-3 xl:grid-cols-4 gap-2"
+          className="grid grid-cols-1 gap-2"
         >
-          {collection?.map((entry) => (
-            <ImageCard
-              type="backdrop"
-              file_path={entry.file_path}
-              movie_id={entry.movie_id}
-              key={entry.file_path}
-              inCollection={true}
-              aspect_ratio={entry.aspect_ratio}
-              width={entry.width}
-              height={entry.height}
-            />
-          ))}
+          {collection
+            ?.filter((a) => a.type == 'backdrop')
+            .sort(
+              (a, b) =>
+                new Date(a.added_on).getTime() - new Date(b.added_on).getTime()
+            )
+            .map((entry) => (
+              <ImageCard
+                type="backdrop"
+                file_path={entry.file_path}
+                movie_id={entry.movie_id}
+                key={entry.file_path}
+                inCollection={true}
+                aspect_ratio={entry.aspect_ratio}
+                width={entry.width}
+                height={entry.height}
+              />
+            ))}
         </div>
       </Container>
     </HandleAsync>
