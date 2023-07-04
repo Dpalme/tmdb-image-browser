@@ -4,6 +4,7 @@ import { lazy } from 'react';
 const Homepage = lazy(() => import('@/home/page'));
 const MoviePage = lazy(() => import('@/movie/page'));
 const CollectionPage = lazy(() => import('@/collection/page'));
+const SearchPage = lazy(() => import('@/search/page'));
 
 export const ApplicationRouter = () => {
   const location = useLocation();
@@ -12,6 +13,7 @@ export const ApplicationRouter = () => {
       <Route path="/" element={<Homepage />} />
       <Route path="/movie/:movieId" element={<MoviePage />} />
       <Route path="/collection" element={<CollectionPage />} />
+      <Route path="/search/*" element={<SearchPage />} />
     </Routes>
   );
 };
