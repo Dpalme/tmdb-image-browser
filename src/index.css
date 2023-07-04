@@ -16,29 +16,29 @@
 
 a {
   text-decoration: inherit;
-  @apply relative text-white font-normal;
+  @apply relative text-white dark:text-black font-normal;
+}
+.navlink {
   --link-scale-x: 0%;
 }
 
-a.navlink::before {
+.navlink::before {
   content: '';
   height: 1px;
-  @apply bg-white block absolute bottom-0 w-full
-  transition-transform duration-300 ease-in-out -z-0
+  @apply bg-white dark:bg-black block absolute bottom-0 w-full
+  transition-transform duration-300 ease-in-out -z-0 content
   -left-1;
   transform: scaleX(var(--link-scale-x));
   transform-origin: left;
 }
 
-a:hover {
+.navlink:hover {
   --link-scale-x: 110%;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  min-width: 100vw;
   min-height: 100vh;
 }
 
@@ -46,42 +46,19 @@ h1,
 h2,
 h3,
 h4 {
-  @apply font-title font-extrabold;
+  @apply font-extrabold font-title;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  @apply text-4xl leading-relaxed tracking-tighter;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #010816;
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    color: #102030;
   }
 }
