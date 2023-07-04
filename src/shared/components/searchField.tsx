@@ -3,7 +3,7 @@ import SearchIcon from '@assets/search.svg';
 import { useNavigate } from 'react-router-dom';
 
 export const SearchField = (props: { defaultVisibility?: boolean }) => {
-  const queryField = useRef<HTMLInputElement>();
+  const queryField = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   return (
     <div className="flex flex-row gap-2">
@@ -13,7 +13,6 @@ export const SearchField = (props: { defaultVisibility?: boolean }) => {
         onSubmit={(ev) => {
           navigate(`/search?query=${queryField.current?.value}`);
           ev.preventDefault();
-          setIsVisible(false);
         }}
         className="flex flex-col gap-2"
       >
