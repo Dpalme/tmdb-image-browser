@@ -64,11 +64,10 @@ export const TMDBImage = (props: {
       src={smallestImage}
       alt={props.alt}
       // srcSet={srcSet}
-      className={[props.className, 'w-full'].join(' ')}
+      className={[props.className || 'w-full'].join(' ')}
       loading="lazy"
       style={{ aspectRatio: props.aspectRatio }}
       onLoad={(ev) => ev.currentTarget.setAttribute('srcset', srcSet)}
-      width={360}
     />
   );
 };
