@@ -26,10 +26,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: yarn install
-      - run: echo 'BASE_URL="${{secrets.BASE_URL}}"' >> .env
       - run: echo 'VITE_TMDB_TOKEN="${{secrets.TMDB_TOKEN}}"' >> .env
       - run: yarn build
-      - run: echo '${{secrets.CUSTOM_DOMAIN}}' > ./dist/CNAME
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

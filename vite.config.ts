@@ -11,7 +11,6 @@ export default defineConfig(({ command, mode }) => {
     plugins: [react(), WindiCSS()],
     server: {
       open: true,
-      base: env.BASE_URL,
     },
     resolve: {
       alias: {
@@ -29,6 +28,5 @@ export default defineConfig(({ command, mode }) => {
         ),
       },
     },
-    base: env.BASE_URL || '',
   };
 });

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-const BASE_URL = 'https://image.tmdb.org/t/p/';
+const TMDB_IMG_BASE_URL = 'https://image.tmdb.org/t/p/';
 
 const SIZES = {
   backdrop: ['w300', 'w780', 'w1280', 'original'],
@@ -11,7 +11,7 @@ const SIZES = {
 };
 
 export function getURLForSize(size: string, imgPath: string) {
-  return `${BASE_URL}${size}${imgPath}`;
+  return `${TMDB_IMG_BASE_URL}${size}${imgPath}`;
 }
 
 export function getSmallestImage(
