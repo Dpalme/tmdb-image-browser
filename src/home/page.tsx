@@ -4,16 +4,20 @@ import { HandleAsync } from '../shared/components/handleAsync';
 import { TMDBImage } from '../shared/components/tmdbimages/tmdbImg';
 import { useFeed } from './hooks';
 import { InfiniteScrollTrigger } from '@/shared/components/infinteScrollerTrigger';
+import { FallbackPosters } from '@/shared/components/fallbackPosters';
 
 const Homepage = () => {
   const { movies, error, loading, fetchNextPage, hasNextPage } = useFeed();
   return (
-    <Container>
-      <h1 className="text-6xl">Homepage</h1>
-      <HandleAsync loading={loading} error={error}>
-        <div
-          className="grid grid-cols-2 md:grid-cols-4
+    <Container containerClass="!grid-cols-1">
+      <div
+        className="grid grid-cols-2 md:grid-cols-4
         lg:grid-cols-6 xl:grid-cols-8 gap-2"
+      >
+        <HandleAsync
+          loading={loading}
+          error={error}
+          fallback={<FallbackPosters numberOfPosters={25} />}
         >
           {movies !== undefined &&
             movies.map((movie) => (
@@ -27,10 +31,10 @@ const Homepage = () => {
               </NavLink>
             ))}
           {hasNextPage && (
-            <InfiniteScrollTrigger fetchNextPage={fetchNextPage} />
+            <InfiniteScrollTrigger fetchNextPage={fetchNextPage} padding={32} />
           )}
-        </div>
-      </HandleAsync>
+        </HandleAsync>
+      </div>
     </Container>
   );
 };

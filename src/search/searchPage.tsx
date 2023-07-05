@@ -7,7 +7,7 @@ const SearchPage = () => {
     <Container>
       <div className="flex flex-col gap-2">
         <h1 className="text-6xl">Search</h1>
-        <SearchField defaultVisibility={true} />
+        <SearchField />
       </div>
       <Outlet />
     </Container>

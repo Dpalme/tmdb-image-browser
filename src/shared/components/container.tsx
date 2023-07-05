@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { m } from 'framer-motion';
 import { ResponsiveBackground } from './tmdbimages/responsiveBackground';
 
 export const Container = (props: {
@@ -10,23 +9,7 @@ export const Container = (props: {
   sectionClass?: string;
 }) => {
   return (
-    <m.section
-      layoutScroll
-      layout
-      initial={{
-        opacity: 0,
-        zIndex: 0,
-      }}
-      whileInView={{
-        opacity: 1,
-        zIndex: 0,
-      }}
-      exit={{
-        opacity: 0,
-        zIndex: 1,
-      }}
-      transition={{ duration: 1 }}
-      viewport={{ once: true }}
+    <section
       className={[
         'w-screen h-screen overflow-hidden fixed top-0',
         props.sectionClass,
@@ -36,14 +19,14 @@ export const Container = (props: {
         <ResponsiveBackground imagePath={props.backgroundImage} />
       )}
       <div
-        className="pl-12 pt-8 pb-16 md:pb-4 pr-4
-        h-[calc(100vh-3.5rem)] mt-16 overflow-y-auto w-full
-        max-w-full overflow-x-hidden min-h-full overscroll-contain
+        className="p-8 md:pb-4 md:mb-0
+        h-[calc(100vh-4rem)] md:mt-16 overflow-y-auto w-full
+        max-w-full overflow-x-hidden overscroll-contain
         @container"
       >
         <div
           className={[
-            'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_3fr] gap-16 pb-16',
+            'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_3fr] gap-16',
             'drop-shadow-sm',
             props.containerClass?.includes('items-')
               ? props.containerClass
@@ -53,6 +36,6 @@ export const Container = (props: {
           {props.children}
         </div>
       </div>
-    </m.section>
+    </section>
   );
 };

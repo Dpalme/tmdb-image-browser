@@ -12,8 +12,25 @@ export const ModalTMDBImage = (props: {
   width: number;
 }) => {
   return (
-    <div className="h-full w-full grid grid-rows-[1fr_4rem] md:grid-cols-[2rem_1fr] gap-2">
-      <div className="flex flex-row gap-2 w-8 items-center order-last md:(order-first flex-col w-auto h-12)">
+    <div
+      className="h-full w-full max-h-screen grid top-0 gap-2 relative
+    grid-rows-[1fr_3rem]"
+    >
+      <div className="flex items-center justify-center overflow-hidden">
+        <TMDBImage
+          type={props.type}
+          path={props.file_path}
+          className="object-contain w-full max-h-[100%] max-w-[100%]"
+        />
+      </div>
+      <div
+        className="flex flex-row gap-8 items-center
+      p-4 rounded-md shadow-lg justify-self-center
+      invert filter dark:(invert-0) bg-black text-white"
+      >
+        <p>
+          {props.width} X {props.height}
+        </p>
         <a
           href={getURLForSize('original', props.file_path)}
           download={true}
@@ -23,12 +40,6 @@ export const ModalTMDBImage = (props: {
         </a>
         <AddToCollectionButton {...props} />
       </div>
-      <TMDBImage
-        type={props.type}
-        path={props.file_path}
-        aspectRatio={props.aspect_ratio}
-        className="flex-grow h-full w-full object-contain"
-      />
     </div>
   );
 };

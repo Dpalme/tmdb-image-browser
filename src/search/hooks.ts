@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { getSearch } from './services';
 import { useCallback } from 'react';
 
-export const useSearch = (query: string) => {
+export const useSearch = (query: string = '') => {
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
       ['search', query],

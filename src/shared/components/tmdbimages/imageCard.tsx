@@ -1,7 +1,6 @@
 import { TMDBImage } from '@/shared/components/tmdbimages/tmdbImg';
 import { useModal } from '@/shared/hooks/useModal';
 import { useCallback } from 'react';
-import { m } from 'framer-motion';
 import { AddToCollectionButton } from '@/shared/components/tmdbimages/addToCollectionButton';
 import { ModalTMDBImage } from '@/shared/components/tmdbimages/modalImage';
 
@@ -20,11 +19,7 @@ export const ImageCard = (props: {
   }, [setModal]);
 
   return (
-    <m.div
-      initial={{ opacity: 0, y: '100%' }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.3 }}
+    <div
       className={[
         'relative self-start',
         props.type == 'backdrop' && 'row-span-1 order-1',
@@ -36,16 +31,16 @@ export const ImageCard = (props: {
         path={props.file_path}
         key={props.file_path}
         aspectRatio={props.aspect_ratio}
-        className="bg-gray-600"
+        className="bg-gray-600 w-full"
       />
       <div
         className="absolute top-0 left-0 w-full h-full opacity-0
-        hover:opacity-100 transition-opacity flex flex-col items-end
+        md:hover:opacity-100 transition-opacity flex flex-col items-end
         cursor-pointer"
         onClick={() => imageToModal()}
       >
         <div
-          className="dark:bg-black bg-white bg-opacity-75 p-2
+          className="bg-white dark:bg-black bg-opacity-75 p-2
         font-extralight italic"
         >
           <AddToCollectionButton {...props} />
@@ -57,6 +52,6 @@ export const ImageCard = (props: {
           {props.width} x {props.height}
         </div>
       </div>
-    </m.div>
+    </div>
   );
 };

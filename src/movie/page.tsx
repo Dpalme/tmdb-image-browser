@@ -4,7 +4,7 @@ import { useMovie } from './hooks';
 import { HandleAsync } from '../shared/components/handleAsync';
 import { Container } from '../shared/components/container';
 import { TMDBImage } from '../shared/components/tmdbimages/tmdbImg';
-import { ImageCard } from './imageCard';
+import { ImageCard } from '../shared/components/tmdbimages/imageCard';
 import { useGetCollection } from '@/collection/hooks';
 
 function Page() {
@@ -21,15 +21,15 @@ function Page() {
       <Container backgroundImage={movie?.images?.backdrops[0].file_path || ''}>
         <div className="h-[100vh - 3.5rem]">
           <div
-            className="flex-col fixed bottom-8
-          items-start justify-end w-full drop-shadow-lg filter overscroll-auto"
+            className="flex-col 
+            md:(fixed bottom-8 items-start justify-end w-full drop-shadow-lg filter overscroll-auto)"
           >
             {movieLogo !== undefined && movieLogo.length > 0 ? (
               <TMDBImage
                 type="logo"
                 path={movieLogo[0].file_path}
                 alt={movie?.title}
-                className="drop-shadow-md filter max-h-24 w-auto"
+                className="drop-shadow-md filter object-contain w-full max-h-[100%] max-w-[100%]"
               />
             ) : (
               <h1 className="text-4xl font-extrabold font-title">

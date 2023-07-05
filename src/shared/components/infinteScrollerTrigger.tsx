@@ -1,7 +1,19 @@
-import { m } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { useIsOnScreen } from '../hooks/useIsOnScreen';
 
 export const InfiniteScrollTrigger = (props: {
   fetchNextPage: CallableFunction;
+  padding?: number;
 }) => {
-  return <m.div onViewportEnter={() => props.fetchNextPage()}></m.div>;
+  const itemRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIsOnScreen(itemRef);
+  useEffect(() => {
+    isVisible && props.fetchNextPage();
+  }, [isVisible]);
+  return (
+    <div
+      ref={itemRef}
+      style={{ transform: `translateY(${(props.padding || 0) * -1}px)` }}
+    ></div>
+  );
 };
