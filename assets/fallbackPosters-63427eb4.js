@@ -1,0 +1,1 @@
+import{j as e}from"./index-451883d1.js";const t=a=>e.jsx(e.Fragment,{children:[...Array(a.numberOfPosters).keys()].map(r=>e.jsx("div",{className:"bg-gray-200 dark:bg-gray-900 animate-pulse w-full",style:{aspectRatio:a.type&&a.type=="backdrop"?1.778:.667}},r))});export{t as F};
