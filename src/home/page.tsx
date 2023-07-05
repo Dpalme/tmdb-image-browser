@@ -4,6 +4,7 @@ import { HandleAsync } from '../shared/components/handleAsync';
 import { TMDBImage } from '../shared/components/tmdbimages/tmdbImg';
 import { useFeed } from './hooks';
 import { InfiniteScrollTrigger } from '@/shared/components/infinteScrollerTrigger';
+import { FallbackPosters } from '@/shared/components/fallbackPosters';
 
 const Homepage = () => {
   const { movies, error, loading, fetchNextPage, hasNextPage } = useFeed();
@@ -16,17 +17,7 @@ const Homepage = () => {
         <HandleAsync
           loading={loading}
           error={error}
-          fallback={
-            <>
-              {[...Array(25).keys()].map((n) => (
-                <div
-                  className="bg-gray-200 dark:bg-gray-900 animate-pulse w-full"
-                  style={{ aspectRatio: 0.667 }}
-                  key={n}
-                />
-              ))}
-            </>
-          }
+          fallback={<FallbackPosters numberOfPosters={25} />}
         >
           {movies !== undefined &&
             movies.map((movie) => (

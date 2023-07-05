@@ -3,15 +3,17 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  @apply 'font-sans';
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth !important;
+  @apply font-sans bg-black text-white;
 }
 
 a {
@@ -34,6 +36,11 @@ a {
 
 .navlink:hover {
   --link-scale-x: 110%;
+}
+
+html {
+  overscroll-behavior: none;
+  scroll-behavior: smooth;
 }
 
 body {
