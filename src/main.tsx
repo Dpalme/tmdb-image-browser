@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import './index.css';
 import { LoadingBackdrop } from './shared/components/backdrop';
 import 'virtual:windi.css';
@@ -13,9 +13,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryProvider>
       <Suspense fallback={<LoadingBackdrop />}>
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <HashRouter basename={import.meta.env.BASE_URL}>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </Suspense>
     </QueryProvider>
   </React.StrictMode>
