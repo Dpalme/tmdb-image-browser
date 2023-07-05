@@ -1,34 +1,61 @@
 import { NavLink } from 'react-router-dom';
-import { m, useReducedMotion } from 'framer-motion';
 import CollectionIcon from '@assets/folder.svg';
+import Logo from '@assets/Posterify.svg';
+import SearchIcon from '@assets/search.svg';
 import { SearchField } from './searchField';
 
 export const Navbar = () => {
-  const shouldReduceMotion = useReducedMotion();
   return (
-    <m.nav
-      className="flex gap-2 md:gap-8 fixed
-      pl-12 py-4 md:px-4 bottom-0 md:top-0
-      md:bottom-auto right-0 md:left-0
-      flex-col md:flex-row backdrop-blur-lg backdrop-filter
-      w-full z-20 dark:(bg-black text-white) bg-white text-black"
-      initial={{ y: shouldReduceMotion ? 0 : '-100%' }}
-      animate={{ y: 0 }}
-      transition={{ duration: 1 }}
+    <nav
+      className="flex gap-2 fixed px-4 py-4
+      bottom-0 right-0 flex-row backdrop-blur-lg
+      backdrop-filter w-full z-20 bg-white
+      text-black justify-evenly items-center
+      md:(justify-start gap-8 top-0 left-0 bottom-auto pl-12)
+      dark:(bg-dark-700 text-white)"
     >
-      <NavLink to="/" className="font-title text-lg navlink">
-        POSTERIFY
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          [
+            'font-title text-lg navlink flex',
+            'flex-row gap-2 items-center',
+            isActive && 'text-emerald-600',
+          ].join(' ')
+        }
+      >
+        <img src={Logo} alt="Posterify Logo" className="w-8" />
+        <span className="hidden md:inline-block">POSTERIFY</span>
       </NavLink>
-      <div className="flex gap-6 md:gap-4 items-center">
-        <NavLink
-          to="/collection"
-          className="lowercase md:text-base text-xl drop-shadow-lg navlink"
-        >
-          <img src={CollectionIcon} alt="Collection" />
-        </NavLink>
+      <NavLink
+        to="/collection"
+        className={({ isActive }) =>
+          [
+            'lowercase md:text-base text-xl drop-shadow-lg navlink',
+            isActive && 'text-emerald-600',
+          ].join(' ')
+        }
+      >
+        <object
+          type=""
+          data={CollectionIcon}
+          className="pointer-events-none dark:(invert filter)"
+        />
+      </NavLink>
+      <NavLink
+        to="/search"
+        className={({ isActive }) =>
+          [
+            'lowercase md:text-base text-xl drop-shadow-lg navlink md:hidden dark:(invert filter)',
+          ].join(' ')
+        }
+      >
+        <object type="" data={SearchIcon} className="pointer-events-none" />
+      </NavLink>
+      <div className="hidden md:block">
         <SearchField />
       </div>
-    </m.nav>
+    </nav>
   );
 };
 
