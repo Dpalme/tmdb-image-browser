@@ -8,12 +8,25 @@ import { InfiniteScrollTrigger } from '@/shared/components/infinteScrollerTrigge
 const Homepage = () => {
   const { movies, error, loading, fetchNextPage, hasNextPage } = useFeed();
   return (
-    <Container>
-      <h1 className="text-6xl">Homepage</h1>
-      <HandleAsync loading={loading} error={error}>
-        <div
-          className="grid grid-cols-2 md:grid-cols-4
+    <Container containerClass="!grid-cols-1">
+      <div
+        className="grid grid-cols-2 md:grid-cols-4
         lg:grid-cols-6 xl:grid-cols-8 gap-2"
+      >
+        <HandleAsync
+          loading={loading}
+          error={error}
+          fallback={
+            <>
+              {[...Array(25).keys()].map((n) => (
+                <div
+                  className="bg-gray-200 dark:bg-gray-900 animate-pulse w-full"
+                  style={{ aspectRatio: 0.667 }}
+                  key={n}
+                />
+              ))}
+            </>
+          }
         >
           {movies !== undefined &&
             movies.map((movie) => (
@@ -27,10 +40,10 @@ const Homepage = () => {
               </NavLink>
             ))}
           {hasNextPage && (
-            <InfiniteScrollTrigger fetchNextPage={fetchNextPage} />
+            <InfiniteScrollTrigger fetchNextPage={fetchNextPage} padding={32} />
           )}
-        </div>
-      </HandleAsync>
+        </HandleAsync>
+      </div>
     </Container>
   );
 };

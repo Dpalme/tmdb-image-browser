@@ -2,44 +2,25 @@ import { useGetCollection } from './hooks';
 import { HandleAsync } from '@/shared/components/handleAsync';
 import { Container } from '@/shared/components/container';
 import { ImageCard } from '@/shared/components/tmdbimages/imageCard';
-import { NavLink } from 'react-router-dom';
+import { FallbackPosters } from '@/shared/components/fallbackPosters';
+import { lazy } from 'react';
+
+const Tutorial = lazy(() => import('./tutorial'));
 
 export const CollectionPage = () => {
   const { collection, isLoading, error } = useGetCollection();
 
   return (
-    <HandleAsync loading={isLoading} error={error}>
-      <Container>
-        <div className="grid grid-cols-1 gap-2">
-          {!collection ||
-            (collection.length == 0 && (
-              <>
-                <h1 className="text-2xl mb-4">
-                  You haven't collected anything!
-                </h1>
-                <p>
-                  Try going to the{' '}
-                  <NavLink to="/" className="font-extrabold text-emerald-600">
-                    homepage
-                  </NavLink>{' '}
-                  and finding a film you like
-                </p>
-                <p className='mb-2'>
-                  Once there, click on any image you like and click the heart
-                  icon.
-                </p>
-                <p>Here's an example image:</p>
-                <ImageCard
-                  type="poster"
-                  movie_id={772515}
-                  file_path="/1mZcxuL4GLUvPdEXC4iZPjG2EO3.jpg"
-                  aspect_ratio={0.667}
-                  height={3000}
-                  width={2000}
-                  inCollection={false}
-                />
-              </>
-            ))}
+    <Container>
+      <div className="grid grid-cols-1 gap-2">
+        <HandleAsync loading={isLoading} error={error}>
+          {!collection || (collection.length == 0 && <Tutorial />)}
+        </HandleAsync>
+        <HandleAsync
+          loading={isLoading}
+          error={false}
+          fallback={<FallbackPosters numberOfPosters={5} />}
+        >
           {collection
             ?.filter((a) => a.type == 'poster')
             .sort(
@@ -58,8 +39,14 @@ export const CollectionPage = () => {
                 height={entry.height}
               />
             ))}
-        </div>
-        <div className="grid grid-cols-1 gap-2">
+        </HandleAsync>
+      </div>
+      <div className="grid grid-cols-1 gap-2">
+        <HandleAsync
+          loading={isLoading}
+          error={false}
+          fallback={<FallbackPosters numberOfPosters={5} type="backdrop" />}
+        >
           {collection
             ?.filter((a) => a.type == 'backdrop')
             .sort(
@@ -78,9 +65,9 @@ export const CollectionPage = () => {
                 height={entry.height}
               />
             ))}
-        </div>
-      </Container>
-    </HandleAsync>
+        </HandleAsync>
+      </div>
+    </Container>
   );
 };
 export default CollectionPage;
