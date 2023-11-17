@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import CollectionIcon from '@assets/folder.svg';
+import CollectionIcon from '@assets/heart_filled.svg';
 import Logo from '@assets/Posterify.svg';
 import SearchIcon from '@assets/search.svg';
 import { SearchField } from './searchField';
@@ -39,7 +39,7 @@ export const Navbar = () => {
         <object
           type=""
           data={CollectionIcon}
-          className="pointer-events-none dark:(invert filter)"
+          className="pointer-events-none"
         />
       </NavLink>
       <NavLink
