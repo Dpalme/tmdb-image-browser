@@ -28,18 +28,8 @@ function getSrcSetForImage(
 ) {
   const sizes = SIZES[type];
   const srcSets = sizes
-    .slice(0, -1)
-    .map((size, i) => `${getURLForSize(size, path)} ${size.slice(1)}w`);
-
-  const lastTwoSizes = sizes
-    .slice(sizes.length - 3, -1)
-    .map((a) => parseInt(a.slice(1)));
-
-  srcSets.push(
-    `${getURLForSize('original', path)} ${
-      (lastTwoSizes[1] << 1) - lastTwoSizes[0]
-    }w`
-  );
+    .slice(2)
+    .map((size, i) => `${getURLForSize(size, path)} ${i + 1}x`);
 
   return srcSets.join(',');
 }
@@ -50,9 +40,14 @@ export const TMDBImage = (props: {
   alt?: string;
   className?: string;
   aspectRatio?: number;
+  fullSize?: boolean;
 }) => {
   const smallestImage = useMemo(
     () => getSmallestImage(props.type, props.path),
+    [props.type, props.path]
+  );
+  const originalImage = useMemo(
+    () => getURLForSize('original', props.path),
     [props.type, props.path]
   );
   const srcSet = useMemo(
@@ -61,13 +56,14 @@ export const TMDBImage = (props: {
   );
   return (
     <img
-      src={smallestImage}
+      src={!!props.fullSize ? originalImage : smallestImage}
       alt={props.alt}
-      // srcSet={srcSet}
       className={[props.className || 'w-full'].join(' ')}
       loading="lazy"
       style={{ aspectRatio: props.aspectRatio }}
-      onLoad={(ev) => ev.currentTarget.setAttribute('srcset', srcSet)}
+      onLoad={(ev) =>
+        !props.fullSize && ev.currentTarget.setAttribute('srcset', srcSet)
+      }
     />
   );
 };

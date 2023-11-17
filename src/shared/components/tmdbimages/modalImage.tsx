@@ -21,6 +21,7 @@ export const ModalTMDBImage = (props: {
           type={props.type}
           path={props.file_path}
           className="object-contain w-full max-h-[100%] max-w-[100%]"
+          fullSize={true}
         />
       </div>
       <div
