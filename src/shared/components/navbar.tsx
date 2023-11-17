@@ -11,7 +11,7 @@ export const Navbar = () => {
       bottom-0 right-0 flex-row backdrop-blur-lg
       backdrop-filter w-full z-20 bg-white
       text-black justify-evenly items-center
-      md:(justify-start gap-8 top-0 left-0 bottom-auto pl-12)
+      md:(justify-start gap-8 top-0 left-0 bottom-auto px-12)
       dark:(bg-dark-700 text-white)"
     >
       <NavLink
@@ -24,7 +24,7 @@ export const Navbar = () => {
           ].join(' ')
         }
       >
-        <img src={Logo} alt="Posterify Logo" className="w-8" />
+        <img src={Logo} alt="Posterify Logo" className="w-8" height={24} />
         <span className="hidden md:inline-block">POSTERIFY</span>
       </NavLink>
       <NavLink
@@ -36,11 +36,7 @@ export const Navbar = () => {
           ].join(' ')
         }
       >
-        <object
-          type=""
-          data={CollectionIcon}
-          className="pointer-events-none"
-        />
+        <img src={CollectionIcon} className="pointer-events-none" height={24} />
       </NavLink>
       <NavLink
         to="/search"
@@ -50,9 +46,9 @@ export const Navbar = () => {
           ].join(' ')
         }
       >
-        <object type="" data={SearchIcon} className="pointer-events-none" />
+        <img src={SearchIcon} className="pointer-events-none" height={24} />
       </NavLink>
-      <div className="hidden md:block">
+      <div className="hidden md:(ml-auto block)">
         <SearchField />
       </div>
     </nav>

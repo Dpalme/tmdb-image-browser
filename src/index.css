@@ -14,12 +14,24 @@
   scrollbar-width: none; /* Firefox */
   scroll-behavior: smooth !important;
   @apply font-sans bg-black text-white;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+*::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }
 
 a {
   text-decoration: inherit;
   @apply relative text-white dark:text-black font-normal;
 }
+
+#root {
+  @apply fixed overflow-x-hidden w-screen h-screen;
+}
+
 .navlink {
   --link-scale-x: 0%;
 }

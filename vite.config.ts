@@ -9,9 +9,10 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     plugins: [react(), WindiCSS()],
-    server: {
-      open: true,
-    },
+    // server: {
+    //   open: true,
+    // },
+    esbuild: false,
     resolve: {
       alias: {
         '@': path.resolve(

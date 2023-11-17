@@ -34,10 +34,10 @@ export const SearchField = () => {
             required={true}
             defaultValue={searchParams.get('query') || ''}
           />
-          <object
-            data={SearchIcon}
-            type=""
+          <img
+            src={SearchIcon}
             className="absolute left-2 top-1 pointer-events-none dark:(invert filter)"
+            height={24}
           />
         </div>
       </form>

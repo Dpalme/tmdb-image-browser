@@ -56,6 +56,17 @@ function Page() {
               {movie?.vote_average.toFixed(1)} / 10
             </p>
           </div>
+          <div
+            className="fixed left-1/2 bottom-8 -translate-x-1/2 transform
+          animate-bounce cursor-pointer"
+            onClick={(ev) =>
+              ev.currentTarget.parentNode!.parentNode!.parentNode!.parentElement!.scrollBy(
+                { top: window.innerHeight * 0.8, behavior: 'smooth' }
+              )
+            }
+          >
+            <span className="block scale-x-250 transform">V</span>
+          </div>
         </Container>
         <Container
           relative={true}
@@ -78,19 +89,28 @@ function Page() {
                 {...img}
               />
             ))}
-          {/* {movie?.images?.backdrops
-          .sort((a, b) => b.height - a.height + (b.width - a.width))
-          .map((img) => (
-            <ImageCard
-            type="backdrop"
-            movie_id={movie.id}
-            inCollection={
-              !!collection?.find((entry) => entry.file_path == img.file_path)
-            }
-            {...img}
-            key={img.file_path}
-            />
-          ))} */}
+        </Container>
+        <Container
+          relative={true}
+          sectionClass="w-screen overflow-hidden !w-screen"
+          containerClass="!bg-white dark:(!bg-black) !grid-cols-1 !mt-0 md:pt-16"
+          gridClass="!grid-cols-1 !md:grid-cols-3 !lg:grid-cols-4 !xl:grid-cols-5 !gap-4"
+        >
+          {movie?.images?.backdrops
+            .sort((a, b) => b.height - a.height + (b.width - a.width))
+            .map((img) => (
+              <ImageCard
+                type="backdrop"
+                movie_id={movie.id}
+                inCollection={
+                  !!collection?.find(
+                    (entry) => entry.file_path == img.file_path
+                  )
+                }
+                {...img}
+                key={img.file_path}
+              />
+            ))}
         </Container>
       </div>
     </HandleAsync>
