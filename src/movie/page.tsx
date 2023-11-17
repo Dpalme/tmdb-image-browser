@@ -18,25 +18,30 @@ function Page() {
 
   return (
     <HandleAsync loading={loading} error={error}>
-      <Container backgroundImage={movie?.images?.backdrops[0].file_path || ''}>
-        <div className="h-[100vh - 3.5rem]">
-          <div
-            className="flex-col 
-            md:(fixed bottom-8 items-start justify-end w-full drop-shadow-lg filter overscroll-auto)"
-          >
+      <div className="w-screen h-screen overflow-x-hidden overflow-y-scrol md:mt-16">
+        <Container
+          backgroundImage={movie?.images?.backdrops[0].file_path || ''}
+          relative={true}
+          sectionClass="h-[calc(100vh-8rem)] flex flex-col justify-end overflow-hidden !w-screen"
+          containerClass="flex flex-col justify-end relative pb-20 md:pb-8
+        bg-gradient-to-b from-transparent dark:(to-black)
+        to-white opacity-100"
+        >
+          <div className="flex-col items-start justify-end w-full drop-shadow-lg filter overscroll-auto">
             {movieLogo !== undefined && movieLogo.length > 0 ? (
               <TMDBImage
                 type="logo"
                 path={movieLogo[0].file_path}
                 alt={movie?.title}
-                className="drop-shadow-md filter object-contain w-full max-h-[100%] max-w-[100%]"
+                fullSize={true}
+                className="drop-shadow-md filter object-contain w-sm max-h-[100%] max-w-[100%]"
               />
             ) : (
               <h1 className="text-4xl font-extrabold font-title">
                 {movie?.title}
               </h1>
             )}
-            <p className="font-bold">
+            <p className="font-bold mt-4">
               {movie?.release_date.slice(0, 4)}
               {movie?.title != movie?.original_title && (
                 <>
@@ -47,46 +52,47 @@ function Page() {
                 </>
               )}
             </p>
-            <p className="text-gray-700 dark:text-gray-400 mt-4">
+            <p className="text-gray-700 dark:text-gray-400 mt-2">
               {movie?.vote_average.toFixed(1)} / 10
             </p>
           </div>
-        </div>
-        <div className="md:col-start-2 animate-slide-in-left">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
-            {movie?.images?.backdrops
-              .sort((a, b) => b.height - a.height + (b.width - a.width))
-              .map((img) => (
-                <ImageCard
-                  type="backdrop"
-                  movie_id={movie.id}
-                  inCollection={
-                    !!collection?.find(
-                      (entry) => entry.file_path == img.file_path
-                    )
-                  }
-                  {...img}
-                  key={img.file_path}
-                />
-              ))}
-            {movie?.images?.posters
-              .sort((a, b) => b.height - a.height + (b.width - a.width))
-              .map((img) => (
-                <ImageCard
-                  type="poster"
-                  movie_id={movie.id}
-                  inCollection={
-                    !!collection?.find(
-                      (entry) => entry.file_path == img.file_path
-                    )
-                  }
-                  key={img.file_path}
-                  {...img}
-                />
-              ))}
-          </div>
-        </div>
-      </Container>
+        </Container>
+        <Container
+          relative={true}
+          sectionClass="w-screen overflow-hidden !w-screen"
+          containerClass="!bg-white dark:(!bg-black) !grid-cols-1 !mt-0 md:pt-16"
+          gridClass="!grid-cols-1 !md:grid-cols-3 !lg:grid-cols-4 !xl:grid-cols-5 !gap-4"
+        >
+          {movie?.images?.posters
+            .sort((a, b) => b.height - a.height + (b.width - a.width))
+            .map((img) => (
+              <ImageCard
+                type="poster"
+                movie_id={movie.id}
+                inCollection={
+                  !!collection?.find(
+                    (entry) => entry.file_path == img.file_path
+                  )
+                }
+                key={img.file_path}
+                {...img}
+              />
+            ))}
+          {/* {movie?.images?.backdrops
+          .sort((a, b) => b.height - a.height + (b.width - a.width))
+          .map((img) => (
+            <ImageCard
+            type="backdrop"
+            movie_id={movie.id}
+            inCollection={
+              !!collection?.find((entry) => entry.file_path == img.file_path)
+            }
+            {...img}
+            key={img.file_path}
+            />
+          ))} */}
+        </Container>
+      </div>
     </HandleAsync>
   );
 }
