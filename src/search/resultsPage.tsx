@@ -1,17 +1,42 @@
 import { HandleAsync } from '@/shared/components/handleAsync';
-import { NavLink, useSearchParams } from 'react-router-dom';
 import { useSearch } from './hooks';
 import { TMDBImage } from '@/shared/components/tmdbimages/tmdbImg';
 import { InfiniteScrollTrigger } from '@/shared/components/infinteScrollerTrigger';
-import { Container } from '@/shared/components/container';
 import { FallbackPosters } from '@/shared/components/fallbackPosters';
+import { Link, createRoute } from '@tanstack/react-router';
+import { getSearch } from './services';
+import SearchRoute from './SearchRoute';
 
-const SearchResultsPage = () => {
-  const [searchParams, _] = useSearchParams();
-  const query = searchParams.get('query');
-  const { movies, error, loading, fetchNextPage, hasNextPage } = useSearch(
-    query || ''
-  );
+type SearchArguments = {
+  query: string;
+};
+
+export const SearchResultsRoute = createRoute({
+  path: '/',
+  loaderDeps: ({ search: { query } }) => ({ query }),
+  validateSearch: (search: Record<string, unknown>): SearchArguments => {
+    // validate and parse the search params into a typed state
+    return {
+      query: (search.query as string) || '',
+    };
+  },
+  getParentRoute: () => SearchRoute,
+  loader: (args) => {
+    const queryClient = args.context.queryClient,
+      query = args.deps.query;
+    queryClient.prefetchInfiniteQuery({
+      queryKey: ['search', query],
+      queryFn: ({ pageParam }) => getSearch(query, pageParam),
+      initialPageParam: 1,
+    });
+  },
+  component: SearchResultsPage,
+});
+
+function SearchResultsPage() {
+  const { query } = SearchResultsRoute.useSearch();
+  const { movies, error, loading, fetchNextPage, hasNextPage } =
+    useSearch(query);
 
   return (
     <>
@@ -24,22 +49,20 @@ const SearchResultsPage = () => {
           error={error}
           fallback={<FallbackPosters numberOfPosters={25} />}
         >
-          {!!movies && movies.length == 0 && !!searchParams.get('query') && (
+          {!!movies && movies.length == 0 && query && (
             <p className="font-title text-3xl">No results</p>
           )}
           {movies !== undefined &&
             movies.map((movie) => (
-              <NavLink
-                to={`/movie/${movie.id}`}
+              <Link
+                key={movie.id}
+                to="/movies/$movieId"
+                params={{ movieId: movie.id + '' }}
                 className="scale-100 hover:scale-110 transform
             transition-transform duration-300"
               >
-                <TMDBImage
-                  type="poster"
-                  path={movie.poster_path}
-                  key={movie.id}
-                />
-              </NavLink>
+                <TMDBImage type="poster" path={movie.poster_path} />
+              </Link>
             ))}
         </HandleAsync>
       </div>
@@ -48,6 +71,6 @@ const SearchResultsPage = () => {
       )}
     </>
   );
-};
+}
 
-export default SearchResultsPage;
+export default SearchResultsRoute;

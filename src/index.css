@@ -19,6 +19,14 @@
   overflow-y: scroll;
 }
 
+img {
+  max-width: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  background-position: center;
+}
+
 *::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }

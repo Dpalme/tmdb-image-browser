@@ -5,14 +5,13 @@ import { useCallback } from 'react';
 
 export const useSearch = (query: string = '') => {
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
-    useInfiniteQuery(
-      ['search', query],
-      ({ pageParam = 1 }) => getSearch(query, pageParam),
-      {
-        getNextPageParam: (lastPage, _) =>
-          lastPage.page + 1 < lastPage.total_pages ? lastPage.page + 1 : null,
-      }
-    );
+    useInfiniteQuery({
+      queryKey: ['search', query],
+      queryFn: ({ pageParam }) => getSearch(query, pageParam),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage, _) =>
+        lastPage.page + 1 < lastPage.total_pages ? lastPage.page + 1 : null,
+    });
 
   const safeFetchNextPage = useCallback(() => {
     if (!hasNextPage) return;
