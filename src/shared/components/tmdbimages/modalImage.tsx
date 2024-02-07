@@ -13,7 +13,7 @@ export const ModalTMDBImage = (props: {
 }) => {
   return (
     <div
-      className="h-full w-full max-h-screen grid top-0 gap-2 relative
+      className="h-full max-h-screen grid top-0 gap-2 relative
     grid-rows-[1fr_3rem]"
     >
       <div className="flex items-center justify-center overflow-hidden">

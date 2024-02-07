@@ -1,23 +1,19 @@
 import { useRef } from 'react';
 import SearchIcon from '@assets/search.svg';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 
 export const SearchField = () => {
   const queryField = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
   return (
     <div className="flex flex-row gap-2 w-full max-w-3xl md:max-w-lg">
       <form
         onSubmit={(ev) => {
           ev.preventDefault();
-          if (!location.pathname.includes('/search'))
-            return navigate(`/search?query=${queryField.current?.value}`);
-          setSearchParams(
-            { query: queryField.current?.value || '' },
-            { replace: true }
-          );
+          navigate({
+            to: '/search',
+            search: { query: queryField.current?.value || '' },
+          });
         }}
         className="flex flex-col gap-2 w-full"
       >
@@ -32,7 +28,6 @@ export const SearchField = () => {
             className="rounded-full px-4 pl-10 text-lg leading-8 border border-gray-300 w-full"
             ref={queryField}
             required={true}
-            defaultValue={searchParams.get('query') || ''}
           />
           <img
             src={SearchIcon}

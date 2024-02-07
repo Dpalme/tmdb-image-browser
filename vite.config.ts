@@ -3,12 +3,13 @@ import react from '@vitejs/plugin-react';
 import WindiCSS from 'vite-plugin-windicss';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
-    plugins: [react(), WindiCSS()],
+    plugins: [react(), WindiCSS(), TanStackRouterVite()],
     // server: {
     //   open: true,
     // },

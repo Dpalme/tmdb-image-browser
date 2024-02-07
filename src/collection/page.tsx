@@ -3,11 +3,14 @@ import { HandleAsync } from '@/shared/components/handleAsync';
 import { Container } from '@/shared/components/container';
 import { ImageCard } from '@/shared/components/tmdbimages/imageCard';
 import { FallbackPosters } from '@/shared/components/fallbackPosters';
-import { lazy } from 'react';
+import Tutorial from './tutorial';
+import { createLazyRoute } from '@tanstack/react-router';
 
-const Tutorial = lazy(() => import('./tutorial'));
+export const CollectionPageLazyRouter = createLazyRoute('/collection')({
+  component: CollectionPage,
+});
 
-export const CollectionPage = () => {
+function CollectionPage() {
   const { collection, isLoading, error } = useGetCollection();
 
   return (
@@ -69,5 +72,5 @@ export const CollectionPage = () => {
       </div>
     </Container>
   );
-};
+}
 export default CollectionPage;

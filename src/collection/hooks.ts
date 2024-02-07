@@ -27,7 +27,8 @@ export const useAddToCollection = () => {
         width: values.width,
         type: values.type,
       }),
-    onSettled: () => queryClient.invalidateQueries(['collection']),
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: ['collection'] }),
   });
 };
 
@@ -43,15 +44,16 @@ export const useRemoveFromCollection = () => {
       type: 'backdrop' | 'logo' | 'poster' | 'profile' | 'still';
     }) => removeFromCollection(values.file_path),
     onSettled: () => {
-      queryClient.invalidateQueries(['collection']);
+      queryClient.invalidateQueries({ queryKey: ['collection'] });
     },
   });
 };
 
 export const useGetCollection = () => {
-  const { data, isLoading, error } = useQuery(['collection'], () =>
-    getCollection()
-  );
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['collection'],
+    queryFn: () => getCollection(),
+  });
 
   return {
     collection: data,

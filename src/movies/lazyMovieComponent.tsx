@@ -1,15 +1,19 @@
-import { useParams } from 'react-router-dom';
-import { ErrorMessage } from '../shared/components/errorMessage';
 import { useMovie } from './hooks';
-import { HandleAsync } from '../shared/components/handleAsync';
-import { Container } from '../shared/components/container';
-import { TMDBImage } from '../shared/components/tmdbimages/tmdbImg';
-import { ImageCard } from '../shared/components/tmdbimages/imageCard';
+import { HandleAsync } from '@shared/components/handleAsync';
+import { Container } from '@shared/components/container';
+import { TMDBImage } from '@shared/components/tmdbimages/tmdbImg';
+import { ImageCard } from '@shared/components/tmdbimages/imageCard';
 import { useGetCollection } from '@/collection/hooks';
+import { createLazyRoute, getRouteApi } from '@tanstack/react-router';
 
-function Page() {
-  const { movieId } = useParams();
-  if (!movieId) return <ErrorMessage message="No movie found" />;
+export const LazyMovieRoute = createLazyRoute('/movies/$movieId')({
+  component: MoviePage,
+});
+
+const route = getRouteApi('/movies/$movieId');
+
+function MoviePage() {
+  const { movieId } = route.useParams();
   const { movie, loading, error } = useMovie(movieId);
   const { collection } = useGetCollection();
   const movieLogo = movie?.images?.logos.filter(
@@ -18,7 +22,7 @@ function Page() {
 
   return (
     <HandleAsync loading={loading} error={error}>
-      <div className="w-screen h-screen overflow-x-hidden overflow-y-scrol md:mt-16">
+      <div className="w-screen h-screen overflow-x-hidden overflow-y-scroll md:mt-16">
         <Container
           backgroundImage={movie?.images?.backdrops[0].file_path || ''}
           relative={true}
@@ -33,7 +37,6 @@ function Page() {
                 type="logo"
                 path={movieLogo[0].file_path}
                 alt={movie?.title}
-                fullSize={true}
                 className="drop-shadow-md filter object-contain w-sm max-h-[100%] max-w-[100%]"
               />
             ) : (
@@ -72,7 +75,7 @@ function Page() {
           relative={true}
           sectionClass="w-screen overflow-hidden !w-screen"
           containerClass="!bg-white dark:(!bg-black) !grid-cols-1 !mt-0 md:pt-16"
-          gridClass="!grid-cols-1 !md:grid-cols-3 !lg:grid-cols-4 !xl:grid-cols-5 !gap-4"
+          gridClass="grid !grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] !gap-2"
         >
           {movie?.images?.posters
             .sort((a, b) => b.height - a.height + (b.width - a.width))
@@ -117,4 +120,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default LazyMovieRoute;

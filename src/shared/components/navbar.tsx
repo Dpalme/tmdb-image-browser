@@ -1,8 +1,24 @@
-import { NavLink } from 'react-router-dom';
 import CollectionIcon from '@assets/heart_filled.svg';
 import Logo from '@assets/Posterify.svg';
 import SearchIcon from '@assets/search.svg';
 import { SearchField } from './searchField';
+import { Link } from '@tanstack/react-router';
+import { ReactNode } from 'react';
+
+const NavLink = (props: { to: string; children: ReactNode }) => {
+  return (
+    <Link
+      to={props.to}
+      className="font-title text-lg navlink flex
+  flex-row gap-2 items-center"
+      activeProps={() => ({
+        className: 'text-emerald-600',
+      })}
+    >
+      {props.children}
+    </Link>
+  );
+};
 
 export const Navbar = () => {
   return (
@@ -14,38 +30,14 @@ export const Navbar = () => {
       md:(justify-start gap-8 top-0 left-0 bottom-auto px-12)
       dark:(bg-dark-700 text-white)"
     >
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          [
-            'font-title text-lg navlink flex',
-            'flex-row gap-2 items-center',
-            isActive && 'text-emerald-600',
-          ].join(' ')
-        }
-      >
+      <NavLink to="/">
         <img src={Logo} alt="Posterify Logo" className="w-8" height={24} />
         <span className="hidden md:inline-block">POSTERIFY</span>
       </NavLink>
-      <NavLink
-        to="/collection"
-        className={({ isActive }) =>
-          [
-            'lowercase md:text-base text-xl drop-shadow-lg navlink',
-            isActive && 'text-emerald-600',
-          ].join(' ')
-        }
-      >
+      <NavLink to="/collection">
         <img src={CollectionIcon} className="pointer-events-none" height={24} />
       </NavLink>
-      <NavLink
-        to="/search"
-        className={({ isActive }) =>
-          [
-            'lowercase md:text-base text-xl drop-shadow-lg navlink md:hidden dark:(invert filter)',
-          ].join(' ')
-        }
-      >
+      <NavLink to="/search">
         <img src={SearchIcon} className="pointer-events-none" height={24} />
       </NavLink>
       <div className="hidden md:(ml-auto block)">

@@ -3,9 +3,10 @@ import { AxiosError } from 'axios';
 import { getMovie } from './services';
 
 export const useMovie = (movieId: number | string) => {
-  const { data, error, isLoading } = useQuery(['movies', movieId], () =>
-    getMovie(movieId)
-  );
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['movies', movieId],
+    queryFn: () => getMovie(movieId),
+  });
 
   return {
     movie: data,

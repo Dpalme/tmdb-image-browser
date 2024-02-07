@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { LoadingSpinner } from '../loadingSpinner';
 import {
   useAddToCollection,
   useRemoveFromCollection,
@@ -17,9 +16,9 @@ export const AddToCollectionButton = (props: {
   width: number;
 }) => {
   const [inCollection, setInCollection] = useState(props.inCollection);
-  const { mutate: addToCollection, isLoading: addLoading } =
+  const { mutate: addToCollection, isPending: addLoading } =
     useAddToCollection();
-  const { mutate: removeFromCollection, isLoading: remLoading } =
+  const { mutate: removeFromCollection, isPending: remLoading } =
     useRemoveFromCollection();
 
   return (

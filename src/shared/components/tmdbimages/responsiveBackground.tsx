@@ -7,7 +7,8 @@ export const ResponsiveBackground = (props: { imagePath: string }) => {
         type="backdrop"
         path={props.imagePath}
         className="fixed -z-2 h-screen w-screen
-        left-0 object-cover top-0"
+        left-0 object-cover top-0 bg-cover"
+        fullSize={true}
       />
     </>
   );

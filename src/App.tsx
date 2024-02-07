@@ -1,16 +1,28 @@
-import { ApplicationRouter } from './Router';
+import {
+  Outlet,
+  ScrollRestoration,
+  createRootRouteWithContext,
+} from '@tanstack/react-router';
 import Navbar from './shared/components/navbar';
 import { ModalProvider } from './shared/hooks/useModal';
+import { QueryClient } from '@tanstack/react-query';
+import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+
+export const rootRoute = createRootRouteWithContext<{
+  queryClient: QueryClient;
+}>()({ component: App });
 
 function App() {
   return (
     <>
       <Navbar />
       <ModalProvider>
-        <ApplicationRouter />
+        <ScrollRestoration getKey={(location) => location.pathname} />
+        <Outlet />
       </ModalProvider>
+      <TanStackRouterDevtools />
     </>
   );
 }
 
-export default App;
+export default rootRoute;
