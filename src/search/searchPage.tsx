@@ -1,6 +1,6 @@
 import { Container } from '@/shared/components/container';
 import { SearchField } from '@/shared/components/searchField';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from '@tanstack/react-router';
 
 const SearchPage = () => {
   return (

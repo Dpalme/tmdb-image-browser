@@ -46,24 +46,42 @@ export const TMDBImage = (props: {
     () => getSmallestImage(props.type, props.path),
     [props.type, props.path]
   );
-  const originalImage = useMemo(
-    () => getURLForSize('original', props.path),
-    [props.type, props.path]
-  );
-  const srcSet = useMemo(
-    () => getSrcSetForImage(props.type, props.path),
-    [props.type, props.path]
-  );
+  const originalImage = useMemo(() => {
+    var size = 'original';
+    if (!props.fullSize) {
+      switch (props.type) {
+        case 'poster':
+          size = 'w342';
+          break;
+        case 'backdrop':
+          size = 'w300';
+          break;
+        case 'logo':
+          size = 'w300';
+          break;
+        case 'still':
+          size = 'w300';
+          break;
+        case 'profile':
+          size = 'w185';
+          break;
+      }
+    }
+    return getURLForSize(size, props.path);
+  }, [props.type, props.path]);
   return (
     <img
-      src={!!props.fullSize ? originalImage : smallestImage}
+      src={originalImage}
       alt={props.alt}
-      className={[props.className || 'w-full'].join(' ')}
+      className={[props.className, 'w-full'].join(' ')}
       loading="lazy"
-      style={{ aspectRatio: props.aspectRatio }}
-      onLoad={(ev) =>
-        !props.fullSize && ev.currentTarget.setAttribute('srcset', srcSet)
-      }
+      style={{
+        aspectRatio: props.aspectRatio,
+        backgroundImage: `url('${smallestImage}')`,
+      }}
+      width={props.type == 'poster' ? 2000 : 3840}
+      height={props.type == 'poster' ? 3000 : 2160}
+      onLoad={(ev) => (ev.currentTarget.style.background = 'transparent')}
     />
   );
 };
