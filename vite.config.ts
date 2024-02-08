@@ -9,7 +9,7 @@ import path from 'path';
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
-    plugins: [react(), WindiCSS()],
+    plugins: [react(), WindiCSS(), TanStackRouterVite()],
     // server: {
     //   open: true,
     // },

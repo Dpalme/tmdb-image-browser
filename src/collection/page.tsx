@@ -4,7 +4,6 @@ import { Container } from '@/shared/components/container';
 import { ImageCard } from '@/shared/components/tmdbimages/imageCard';
 import { FallbackPosters } from '@/shared/components/fallbackPosters';
 import Tutorial from './tutorial';
-
 function CollectionPage() {
   const { collection, isLoading, error } = useGetCollection();
 
