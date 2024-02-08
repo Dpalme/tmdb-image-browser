@@ -1,12 +1,10 @@
 import { TMDBImage } from '@shared/models/image';
-import { ITMDBMovie } from '@shared/models/movie';
 import {
   addToCollection,
   getCollection,
   removeFromCollection,
 } from '@shared/providers/database';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback } from 'react';
 
 export const useAddToCollection = () => {
   const queryClient = useQueryClient();

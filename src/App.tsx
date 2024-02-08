@@ -6,7 +6,6 @@ import {
 import Navbar from './shared/components/navbar';
 import { ModalProvider } from './shared/hooks/useModal';
 import { QueryClient } from '@tanstack/react-query';
-import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
 export const rootRoute = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -20,7 +19,6 @@ function App() {
         <ScrollRestoration getKey={(location) => location.pathname} />
         <Outlet />
       </ModalProvider>
-      <TanStackRouterDevtools />
     </>
   );
 }

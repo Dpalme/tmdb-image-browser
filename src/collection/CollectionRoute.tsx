@@ -1,4 +1,4 @@
-import { createRoute } from '@tanstack/react-router';
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
 import rootRoute from '@/App';
 import { getCollection } from '@/shared/providers/database';
 
@@ -10,4 +10,5 @@ export const CollectionRoute = createRoute({
       queryKey: ['collection'],
       queryFn: () => getCollection(),
     }),
-}).lazy(() => import('./page').then((d) => d.CollectionPageLazyRouter));
+  component: lazyRouteComponent(() => import('./page')),
+});

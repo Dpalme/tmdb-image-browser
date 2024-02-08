@@ -4,11 +4,6 @@ import { Container } from '@/shared/components/container';
 import { ImageCard } from '@/shared/components/tmdbimages/imageCard';
 import { FallbackPosters } from '@/shared/components/fallbackPosters';
 import Tutorial from './tutorial';
-import { createLazyRoute } from '@tanstack/react-router';
-
-export const CollectionPageLazyRouter = createLazyRoute('/collection')({
-  component: CollectionPage,
-});
 
 function CollectionPage() {
   const { collection, isLoading, error } = useGetCollection();
