@@ -19,7 +19,6 @@ function App() {
         <ScrollRestoration getKey={(location) => location.pathname} />
         <Outlet />
       </ModalProvider>
-      <TanStackRouterDevtools />
     </>
   );
 }
