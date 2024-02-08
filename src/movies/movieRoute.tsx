@@ -1,5 +1,5 @@
 import rootRoute from '@/App';
-import { createRoute } from '@tanstack/react-router';
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
 import { getMovie } from './services';
 import { ErrorMessage } from '@/shared/components/errorMessage';
 
@@ -20,6 +20,7 @@ export const MovieRoute = createRoute({
     });
   },
   errorComponent: ({ error }) => <ErrorMessage message={error!.toString()} />,
-}).lazy(() => import('./lazyMovieComponent').then((d) => d.LazyMovieRoute));
+  component: lazyRouteComponent(() => import('./lazyMovieComponent')),
+});
 
 export default MovieRoute;

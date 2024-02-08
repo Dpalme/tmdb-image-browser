@@ -18,7 +18,6 @@ import { CollectionRoute } from './collection/CollectionRoute';
 import SearchResultsRoute from './search/resultsPage';
 
 const routeTree = rootRoute.addChildren([
-  // postsRoute.addChildren([postRoute]),
   SearchRoute.addChildren([SearchResultsRoute]),
   MovieRoute,
   HomeRoute,

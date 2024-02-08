@@ -5,7 +5,7 @@ import { SearchField } from './searchField';
 import { Link } from '@tanstack/react-router';
 import { ReactNode } from 'react';
 
-const NavLink = (props: { to: string; children: ReactNode }) => {
+const NavLink = (props: { to: string; children: ReactNode; search?: any }) => {
   return (
     <Link
       to={props.to}
@@ -14,6 +14,7 @@ const NavLink = (props: { to: string; children: ReactNode }) => {
       activeProps={() => ({
         className: 'text-emerald-600',
       })}
+      search={props.search}
     >
       {props.children}
     </Link>

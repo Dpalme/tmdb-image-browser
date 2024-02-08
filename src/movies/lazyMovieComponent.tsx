@@ -4,11 +4,7 @@ import { Container } from '@shared/components/container';
 import { TMDBImage } from '@shared/components/tmdbimages/tmdbImg';
 import { ImageCard } from '@shared/components/tmdbimages/imageCard';
 import { useGetCollection } from '@/collection/hooks';
-import { createLazyRoute, getRouteApi } from '@tanstack/react-router';
-
-export const LazyMovieRoute = createLazyRoute('/movies/$movieId')({
-  component: MoviePage,
-});
+import { getRouteApi } from '@tanstack/react-router';
 
 const route = getRouteApi('/movies/$movieId');
 
@@ -120,4 +116,4 @@ function MoviePage() {
   );
 }
 
-export default LazyMovieRoute;
+export default MoviePage;
