@@ -16,7 +16,7 @@ export function getURLForSize(size: string, imgPath: string) {
 
 export function getSmallestImage(
   type: 'backdrop' | 'logo' | 'poster' | 'profile' | 'still',
-  path: string
+  path: string,
 ) {
   const sizes = SIZES[type];
   return getURLForSize(sizes[0], path);
@@ -24,7 +24,7 @@ export function getSmallestImage(
 
 function getSrcSetForImage(
   type: 'backdrop' | 'logo' | 'poster' | 'profile' | 'still',
-  path: string
+  path: string,
 ) {
   const sizes = SIZES[type];
   const srcSets = sizes
@@ -44,7 +44,7 @@ export const TMDBImage = (props: {
 }) => {
   const smallestImage = useMemo(
     () => getSmallestImage(props.type, props.path),
-    [props.type, props.path]
+    [props.type, props.path],
   );
   const originalImage = useMemo(() => {
     var size = 'original';

@@ -17,15 +17,15 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         '@': path.resolve(
           path.dirname(fileURLToPath(import.meta.url)),
-          './src'
+          './src',
         ),
         '@shared': path.resolve(
           path.dirname(fileURLToPath(import.meta.url)),
-          './src/shared'
+          './src/shared',
         ),
         '@assets': path.resolve(
           path.dirname(fileURLToPath(import.meta.url)),
-          './src/assets'
+          './src/assets',
         ),
       },
     },

@@ -12,7 +12,10 @@ export function MovieCard({ movie }: { movie: ITMDBMovie }) {
       key={movie.id}
     >
       <div style={{ aspectRatio: '0.667 / 1' }}>
-        <TMDBImage type="poster" path={movie.poster_path} />
+        <TMDBImage
+          type="poster"
+          path={movie.poster_path}
+        />
       </div>
       <div className="p-2">
         <h2 className="text-sm mb-1 truncate">{movie.title}</h2>

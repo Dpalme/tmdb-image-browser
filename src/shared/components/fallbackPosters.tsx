@@ -7,7 +7,10 @@ export const FallbackPosters = (props: {
   return (
     <>
       {[...Array(props.numberOfPosters).keys()].map((n) => (
-        <FallbackPoster type={props.type} key={n} />
+        <FallbackPoster
+          type={props.type}
+          key={n}
+        />
       ))}
     </>
   );

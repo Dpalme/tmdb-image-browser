@@ -17,7 +17,10 @@ export const SearchField = () => {
         }}
         className="flex flex-col gap-2 w-full"
       >
-        <label htmlFor="queryField" className="hidden">
+        <label
+          htmlFor="queryField"
+          className="hidden"
+        >
           Search
         </label>
         <div className="relative h-8">

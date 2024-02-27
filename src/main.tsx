@@ -5,10 +5,7 @@ import { LoadingBackdrop } from './shared/components/backdrop';
 import 'virtual:windi.css';
 import './shared/providers/database';
 
-import {
-  createRouter,
-  RouterProvider,
-} from '@tanstack/react-router';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
 import rootRoute from './App';
 import HomeRoute from './home/page';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -47,5 +44,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <RouterProvider router={router} />
       </Suspense>
     </QueryClientProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

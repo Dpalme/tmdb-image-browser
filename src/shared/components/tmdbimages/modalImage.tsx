@@ -37,7 +37,10 @@ export const ModalTMDBImage = (props: {
           download={true}
           target="_blank"
         >
-          <img src={DownloadIcon} className="w-full h-full" />
+          <img
+            src={DownloadIcon}
+            className="w-full h-full"
+          />
         </a>
         <AddToCollectionButton {...props} />
       </div>

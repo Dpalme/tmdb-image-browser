@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 export const useFetch = async (
   url: string,
   data: any = null,
-  headers: any = null
+  headers: any = null,
 ) => {
   return (
     await axios.get(url, {

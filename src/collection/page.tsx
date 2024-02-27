@@ -10,7 +10,10 @@ function CollectionPage() {
   return (
     <Container>
       <div className="grid grid-cols-1 gap-2">
-        <HandleAsync loading={isLoading} error={error}>
+        <HandleAsync
+          loading={isLoading}
+          error={error}
+        >
           {!collection || (collection.length == 0 && <Tutorial />)}
         </HandleAsync>
         <HandleAsync
@@ -22,7 +25,7 @@ function CollectionPage() {
             ?.filter((a) => a.type == 'poster')
             .sort(
               (a, b) =>
-                new Date(b.added_on).getTime() - new Date(a.added_on).getTime()
+                new Date(b.added_on).getTime() - new Date(a.added_on).getTime(),
             )
             .map((entry) => (
               <ImageCard
@@ -42,13 +45,18 @@ function CollectionPage() {
         <HandleAsync
           loading={isLoading}
           error={false}
-          fallback={<FallbackPosters numberOfPosters={5} type="backdrop" />}
+          fallback={
+            <FallbackPosters
+              numberOfPosters={5}
+              type="backdrop"
+            />
+          }
         >
           {collection
             ?.filter((a) => a.type == 'backdrop')
             .sort(
               (a, b) =>
-                new Date(b.added_on).getTime() - new Date(a.added_on).getTime()
+                new Date(b.added_on).getTime() - new Date(a.added_on).getTime(),
             )
             .map((entry) => (
               <ImageCard

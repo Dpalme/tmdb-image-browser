@@ -36,7 +36,7 @@ export const AddToCollectionButton = (props: {
             },
             {
               onSuccess: () => setInCollection((prevValue) => !prevValue),
-            }
+            },
           );
           ev.stopPropagation();
         }}

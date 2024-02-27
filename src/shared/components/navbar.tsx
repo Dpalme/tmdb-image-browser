@@ -32,14 +32,27 @@ export const Navbar = () => {
       dark:(bg-dark-700 text-white)"
     >
       <NavLink to="/">
-        <img src={Logo} alt="Posterify Logo" className="w-8" height={24} />
+        <img
+          src={Logo}
+          alt="Posterify Logo"
+          className="w-8"
+          height={24}
+        />
         <span className="hidden md:inline-block">POSTERIFY</span>
       </NavLink>
       <NavLink to="/collection">
-        <img src={CollectionIcon} className="pointer-events-none" height={24} />
+        <img
+          src={CollectionIcon}
+          className="pointer-events-none"
+          height={24}
+        />
       </NavLink>
       <NavLink to="/search">
-        <img src={SearchIcon} className="pointer-events-none" height={24} />
+        <img
+          src={SearchIcon}
+          className="pointer-events-none"
+          height={24}
+        />
       </NavLink>
       <div className="hidden md:(ml-auto block)">
         <SearchField />

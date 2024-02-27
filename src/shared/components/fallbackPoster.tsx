@@ -1,4 +1,6 @@
-export default function FallbackPoster(props: {type?: 'backdrop' | 'poster'}) {
+export default function FallbackPoster(props: {
+  type?: 'backdrop' | 'poster';
+}) {
   return (
     <div
       className="bg-gray-200 dark:bg-gray-900 animate-pulse w-full"

@@ -13,11 +13,14 @@ function MoviePage() {
   const { movie, loading, error } = useMovie(movieId);
   const { collection } = useGetCollection();
   const movieLogo = movie?.images?.logos.filter(
-    (img) => img.iso_639_1 == navigator.language.slice(0, 2)
+    (img) => img.iso_639_1 == navigator.language.slice(0, 2),
   );
 
   return (
-    <HandleAsync loading={loading} error={error}>
+    <HandleAsync
+      loading={loading}
+      error={error}
+    >
       <div className="w-screen h-screen overflow-x-hidden overflow-y-scroll md:mt-16">
         <Container
           backgroundImage={movie?.images?.backdrops[0].file_path || ''}
@@ -60,7 +63,7 @@ function MoviePage() {
           animate-bounce cursor-pointer"
             onClick={(ev) =>
               ev.currentTarget.parentNode!.parentNode!.parentNode!.parentElement!.scrollBy(
-                { top: window.innerHeight * 0.8, behavior: 'smooth' }
+                { top: window.innerHeight * 0.8, behavior: 'smooth' },
               )
             }
           >
@@ -81,7 +84,7 @@ function MoviePage() {
                 movie_id={movie.id}
                 inCollection={
                   !!collection?.find(
-                    (entry) => entry.file_path == img.file_path
+                    (entry) => entry.file_path == img.file_path,
                   )
                 }
                 key={img.file_path}
@@ -103,7 +106,7 @@ function MoviePage() {
                 movie_id={movie.id}
                 inCollection={
                   !!collection?.find(
-                    (entry) => entry.file_path == img.file_path
+                    (entry) => entry.file_path == img.file_path,
                   )
                 }
                 {...img}

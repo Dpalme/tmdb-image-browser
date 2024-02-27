@@ -61,13 +61,19 @@ function SearchResultsPage() {
                 className="scale-100 hover:scale-110 transform
             transition-transform duration-300"
               >
-                <TMDBImage type="poster" path={movie.poster_path} />
+                <TMDBImage
+                  type="poster"
+                  path={movie.poster_path}
+                />
               </Link>
             ))}
         </HandleAsync>
       </div>
       {!!movies && movies.length > 0 && hasNextPage && (
-        <InfiniteScrollTrigger fetchNextPage={fetchNextPage} padding={64} />
+        <InfiniteScrollTrigger
+          fetchNextPage={fetchNextPage}
+          padding={64}
+        />
       )}
     </>
   );

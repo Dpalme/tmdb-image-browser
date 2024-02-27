@@ -7,7 +7,10 @@ export const Tutorial = () => {
       <h1 className="text-2xl mb-4">You haven't collected anything!</h1>
       <p>
         Try going to the{' '}
-        <Link to="/" className="font-extrabold text-emerald-600">
+        <Link
+          to="/"
+          className="font-extrabold text-emerald-600"
+        >
           homepage
         </Link>{' '}
         and finding a film you like

@@ -27,9 +27,17 @@ function Homepage() {
           fallback={<FallbackPosters numberOfPosters={32} />}
         >
           {movies !== undefined &&
-            movies.map((movie) => <MovieCard movie={movie} key={movie.id} />)}
+            movies.map((movie) => (
+              <MovieCard
+                movie={movie}
+                key={movie.id}
+              />
+            ))}
           {hasNextPage && (
-            <InfiniteScrollTrigger fetchNextPage={fetchNextPage} padding={32} />
+            <InfiniteScrollTrigger
+              fetchNextPage={fetchNextPage}
+              padding={32}
+            />
           )}
         </HandleAsync>
       </div>
