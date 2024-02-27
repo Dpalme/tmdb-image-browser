@@ -1,15 +1,22 @@
 //@ts-ignore
 var indexedDB =
   window.indexedDB ||
+  // @ts-ignore
   window.webkitIndexedDB ||
+  // @ts-ignore
   window.mozIndexedDB ||
+  // @ts-ignore
   window.OIndexedDB ||
+  // @ts-ignore
   window.msIndexedDB;
-//@ts-ignore
-var IDBTransaction =
+  //@ts-ignore
+  var IDBTransaction =
   window.IDBTransaction ||
+  // @ts-ignore
   window.webkitIDBTransaction ||
+  // @ts-ignore
   window.OIDBTransaction ||
+  // @ts-ignore
   window.msIDBTransaction;
 var dbVersion = 2;
 
